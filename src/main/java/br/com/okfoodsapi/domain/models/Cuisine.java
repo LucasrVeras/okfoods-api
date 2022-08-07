@@ -1,7 +1,5 @@
 package br.com.okfoodsapi.domain.models;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +15,8 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "tab_restaurant")
-public class Restaurant {
+@Table(name = "tab_cuisine")
+public class Cuisine {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +25,4 @@ public class Restaurant {
 	@Column(name = "col_name")
 	@EqualsAndHashCode.Exclude
 	private String name;
-	
-	@Column(name = "col_tax_shipping")
-	@EqualsAndHashCode.Exclude
-	private BigDecimal taxShipping;
 }
