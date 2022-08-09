@@ -1,4 +1,6 @@
-package br.com.okfoodsapi.jpa;
+package br.com.okfoodsapi.jpa.cuisine;
+
+import java.util.List;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -6,8 +8,9 @@ import org.springframework.context.ApplicationContext;
 
 import br.com.okfoodsapi.OkfoodsApiApplication;
 import br.com.okfoodsapi.domain.models.Cuisine;
+import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 
-public class RegistrationCuisineMain{
+public class QueryCuisineMain{
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = 
@@ -15,16 +18,13 @@ public class RegistrationCuisineMain{
 					.web(WebApplicationType.NONE)
 					.run(args);
 		
-		CuisineRegistration cuisineRegistration = applicationContext
-				.getBean(CuisineRegistration.class);
+		CuisineRepository cuisineRepository = applicationContext
+				.getBean(CuisineRepository.class);
+	
+		List<Cuisine> allCuisines = cuisineRepository.all();
 		
-		var cuisine1 = new Cuisine();
-		cuisine1.setName("Brasilian");
-		
-		var cuisine2 = new Cuisine();
-		cuisine2.setName("Japanese");
-		
-		cuisineRegistration.save(cuisine1);
-		cuisineRegistration.save(cuisine2);
+		for (Cuisine cuisine : allCuisines) {
+			System.out.println(cuisine.getName());
+		}
 	}
 }

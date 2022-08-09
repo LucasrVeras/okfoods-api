@@ -1,13 +1,14 @@
-package br.com.okfoodsapi.jpa;
+package br.com.okfoodsapi.jpa.restaurant;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import br.com.okfoodsapi.OkfoodsApiApplication;
-import br.com.okfoodsapi.domain.models.Cuisine;
+import br.com.okfoodsapi.domain.models.Restaurant;
+import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 
-public class AlterationCuisineMain{
+public class RemoveRestaurantMain{
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = 
@@ -15,13 +16,12 @@ public class AlterationCuisineMain{
 					.web(WebApplicationType.NONE)
 					.run(args);
 		
-		CuisineRegistration cuisineRegistration = applicationContext
-				.getBean(CuisineRegistration.class);
-	
-		Cuisine cuisine = new Cuisine();
-		cuisine.setId(1L);
-		cuisine.setName("French");
+		RestaurantRepository restaurantRepository = applicationContext
+				.getBean(RestaurantRepository.class);
 		
-		cuisineRegistration.save(cuisine);
+		var restaurants = new Restaurant();
+		restaurants.setId(1L);
+		
+		restaurantRepository.remove(restaurants);
 	}
 }

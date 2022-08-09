@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.jpa;
+package br.com.okfoodsapi.jpa.cuisine;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -6,8 +6,9 @@ import org.springframework.context.ApplicationContext;
 
 import br.com.okfoodsapi.OkfoodsApiApplication;
 import br.com.okfoodsapi.domain.models.Cuisine;
+import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 
-public class SearchCuisineMain{
+public class RemoveCuisineMain{
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = 
@@ -15,11 +16,12 @@ public class SearchCuisineMain{
 					.web(WebApplicationType.NONE)
 					.run(args);
 		
-		CuisineRegistration cuisineRegistration = applicationContext
-				.getBean(CuisineRegistration.class);
+		CuisineRepository cuisineRepository = applicationContext
+				.getBean(CuisineRepository.class);
 	
-		Cuisine cuisine = cuisineRegistration.search(1L);
+		var cuisines = new Cuisine();
+		cuisines.setId(1L);
 		
-			System.out.println(cuisine.getName());
+		cuisineRepository.remove(cuisines);
 	}
 }

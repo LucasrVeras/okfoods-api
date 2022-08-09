@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
