@@ -26,7 +26,12 @@ public class CuisineRegistration {
 	}
 	
 	@Transactional
-	public Cuisine addCuisine(Cuisine cuisine) {
+	public Cuisine save(Cuisine cuisine) {
 		return manager.merge(cuisine);
+	}
+	
+	@Transactional
+	public void remove(Cuisine cuisine) {
+		manager.remove(cuisine);
 	}
 }

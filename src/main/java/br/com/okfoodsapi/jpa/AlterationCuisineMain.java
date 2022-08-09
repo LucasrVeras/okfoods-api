@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import br.com.okfoodsapi.OkfoodsApiApplication;
 import br.com.okfoodsapi.domain.models.Cuisine;
 
-public class RegistrationCuisineMain{
+public class AlterationCuisineMain{
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = 
@@ -17,14 +17,11 @@ public class RegistrationCuisineMain{
 		
 		CuisineRegistration cuisineRegistration = applicationContext
 				.getBean(CuisineRegistration.class);
+	
+		Cuisine cuisine = new Cuisine();
+		cuisine.setId(1L);
+		cuisine.setName("French");
 		
-		var cuisine1 = new Cuisine();
-		cuisine1.setName("Brasilian");
-		
-		var cuisine2 = new Cuisine();
-		cuisine2.setName("Japanese");
-		
-		cuisineRegistration.save(cuisine1);
-		cuisineRegistration.save(cuisine2);
+		cuisineRegistration.save(cuisine);
 	}
 }
