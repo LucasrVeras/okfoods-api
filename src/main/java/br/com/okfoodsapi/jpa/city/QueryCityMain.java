@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.jpa.cuisine;
+package br.com.okfoodsapi.jpa.city;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import br.com.okfoodsapi.OkfoodsApiApplication;
-import br.com.okfoodsapi.domain.models.Cuisine;
-import br.com.okfoodsapi.domain.repositories.CuisineRepository;
+import br.com.okfoodsapi.domain.models.City;
+import br.com.okfoodsapi.domain.repositories.CityRepository;
 
-public class QueryCuisineMain{ 
+public class QueryCityMain{
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = 
@@ -18,13 +18,14 @@ public class QueryCuisineMain{
 					.web(WebApplicationType.NONE)
 					.run(args);
 		
-		CuisineRepository cuisineRepository = applicationContext
-				.getBean(CuisineRepository.class);
+		CityRepository cityRepository = applicationContext
+				.getBean(CityRepository.class);
 	
-		List<Cuisine> allCuisines = cuisineRepository.all();
+		List<City> allCity = cityRepository.all();
 		
-		for (Cuisine cuisine : allCuisines) {
-			System.out.println(cuisine.getName());
+		for (City city : allCity) {
+			System.out.printf("%s - %s \n", city.getName(),
+					city.getState().getName());
 		}
 	}
 }

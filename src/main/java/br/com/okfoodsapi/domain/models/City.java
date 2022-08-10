@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-@Table(name = "tb_city")
+@Table(name = "tab_city")
 public class City {
 	
 	@EqualsAndHashCode.Include
@@ -23,7 +23,7 @@ public class City {
 	@Id
 	private Long id;
 	
-	@Column(name = "col_city")
+	@Column(name = "col_name")
 	private String name;
 	
 	@ManyToOne
