@@ -24,7 +24,8 @@ public class QueryRestaurantMain{
 		List<Restaurant> allRestaurants = restaurantRepository.all();
 		
 		for (Restaurant restaurant : allRestaurants) {
-			System.out.println(restaurant);
+			System.out.printf("%s - %f - %s \n", restaurant.getName(),
+					restaurant.getTaxShipping(), restaurant.getCuisine().getName());
 		}
 	}
 }
