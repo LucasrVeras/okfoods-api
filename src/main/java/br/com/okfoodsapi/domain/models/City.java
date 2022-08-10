@@ -1,7 +1,5 @@
 package br.com.okfoodsapi.domain.models;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,25 +15,18 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-@Table(name = "tab_restaurant")
-public class Restaurant {
+@Table(name = "tb_city")
+public class City {
 	
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
 	
-	@Column(name = "col_name", nullable = false)
+	@Column(name = "col_city")
 	private String name;
 	
-	@Column(name = "col_tax_shipping", nullable = false)
-	private BigDecimal taxShipping;
-	
 	@ManyToOne
-	@JoinColumn(name = "col_cuisine_id", nullable = false)
-	private Cuisine cuisine;
-	
-	@ManyToOne
-	@JoinColumn(name = "col_methodPayment_id")
-	private MethodPayment methodPayment;
+	@JoinColumn(name = "col_state_id", nullable = false)
+	private State state;
 }

@@ -13,14 +13,14 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tab_cuisine")
-public class Cuisine {
+@Table(name = "tab_method_payment")
+public class MethodPayment {
 	
 	@EqualsAndHashCode.Include
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id
+	private Integer Long;
 	
-	@Column(name = "col_name", nullable = false)
-	private String name;
+	@Column(name = "col_description")
+	private String description;
 }
