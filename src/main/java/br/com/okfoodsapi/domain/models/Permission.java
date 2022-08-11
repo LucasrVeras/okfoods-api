@@ -23,6 +23,4 @@ public class Permission {
 	
 	@Column(name = "col_description")
 	private String description;
-	
-	
 }

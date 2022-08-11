@@ -7,35 +7,33 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
 
-import br.com.okfoodsapi.domain.models.City;
-import br.com.okfoodsapi.domain.repositories.CityRepository;
+import br.com.okfoodsapi.domain.models.State;
+import br.com.okfoodsapi.domain.repositories.StateRepository;
 
 @Component
-public class CityRepositoryImpl implements CityRepository{
+public class StateRepositoryImpl implements StateRepository{
 	
 	@PersistenceContext
 	private EntityManager manager;
 	
 	@Override
-	public List<City> all() {	
-		return manager.createQuery("from City", City.class)
+	public List<State> all() {	
+		return manager.createQuery("from State", State.class)
 				.getResultList();
 	}
 
 	@Override
-	public City searchForId(Long id) {
-		
+	public State searchForId(Long id) {
 		return null;
 	}
 
 	@Override
-	public City add(City city) {
-		
+	public State add(State state) {
 		return null;
 	}
-
+	
 	@Override
-	public void remove(City city) {
-			
+	public void remove(State state) {
+		
 	}
 }
