@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.domain.service;
+package br.com.okfoodsapi.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
