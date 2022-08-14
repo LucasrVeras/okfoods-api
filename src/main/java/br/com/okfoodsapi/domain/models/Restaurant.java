@@ -35,7 +35,7 @@ public class Restaurant {
 	@JoinColumn(name = "col_cuisine_id", nullable = false)
 	private Cuisine cuisine;
 	
-	@ManyToOne
-	@JoinColumn(name = "col_methodPayment_id")
-	private MethodPayment methodPayment;
+//	@ManyToOne
+//	@JoinColumn(name = "col_methodPayment_id")
+//	private MethodPayment methodPayment;
 }

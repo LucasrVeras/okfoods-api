@@ -30,7 +30,7 @@ public class CuisineController {
 	private CuisineRepository cuisineRepository;
 	
 	@Autowired
-	private CuisineRegistrationService cuisineRegistration;
+	private CuisineRegistrationService cuisineService;
 	
 	@GetMapping
 	public List<Cuisine> list(){
@@ -52,7 +52,7 @@ public class CuisineController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cuisine add(@RequestBody Cuisine cuisine) {
-		return cuisineRegistration.add(cuisine);
+		return cuisineService.add(cuisine);
 	}
 	
 	@PutMapping("/{cuisineId}")
@@ -63,7 +63,7 @@ public class CuisineController {
 		
 		if (cuisineCurrent != null) {
 			BeanUtils.copyProperties(cuisine, cuisineCurrent, "id");
-			cuisineRegistration.add(cuisineCurrent);
+			cuisineService.add(cuisineCurrent);
 			return ResponseEntity.ok(cuisineCurrent);
 		}
 			return ResponseEntity.notFound().build();
@@ -72,7 +72,7 @@ public class CuisineController {
 	@DeleteMapping("/{CuiseneId}")
 	public ResponseEntity<Cuisine> remove(@PathVariable Long CuiseneId){		
 		try {
-			cuisineRegistration.remove(CuiseneId);
+			cuisineService.remove(CuiseneId);
 			return ResponseEntity.noContent().build();
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.notFound().build();
