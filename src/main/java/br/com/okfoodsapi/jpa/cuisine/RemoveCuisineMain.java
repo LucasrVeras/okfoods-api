@@ -22,6 +22,6 @@ public class RemoveCuisineMain{
 		var cuisines = new Cuisine();
 		cuisines.setId(1L);
 		
-		cuisineRepository.remove(cuisines);
+		cuisineRepository.remove(cuisines.getId());
 	}
 }
