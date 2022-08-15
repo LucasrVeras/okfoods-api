@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.okfoodsapi.domain.models.City;
@@ -23,19 +25,26 @@ public class CityRepositoryImpl implements CityRepository{
 	}
 
 	@Override
-	public City searchForId(Long id) {
-		
-		return null;
+	public City searchForId(Long cityId) {
+		return manager.find(City.class, cityId);
 	}
 
 	@Override
+	@Transactional
 	public City add(City city) {
-		
-		return null;
+		return manager.merge(city);
 	}
 
 	@Override
-	public void remove(City city) {
-			
+	@Transactional
+	public void remove(Long cityId) {
+		
+		City city = searchForId(cityId);
+		
+		if (city == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		
+		manager.remove(city);
 	}
 }
