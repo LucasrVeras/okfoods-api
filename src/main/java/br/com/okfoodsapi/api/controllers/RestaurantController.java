@@ -19,7 +19,7 @@ import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 import br.com.okfoodsapi.domain.services.RestaurantRegistrationService;
 
 @RestController
-@RequestMapping("/restaurant")
+@RequestMapping("/restaurants")
 public class RestaurantController {
 	
 	@Autowired

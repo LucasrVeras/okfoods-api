@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.okfoodsapi.domain.models.State;
@@ -24,16 +26,25 @@ public class StateRepositoryImpl implements StateRepository{
 
 	@Override
 	public State searchForId(Long id) {
-		return null;
-	}
-
-	@Override
-	public State add(State state) {
-		return null;
+		return manager.find(State.class, id);
 	}
 	
+	@Transactional
 	@Override
-	public void remove(State state) {
+	public State add(State state) {
+		return manager.merge(state);
+	}
+	
+	@Transactional
+	@Override
+	public void remove(Long id) {
 		
+		State state = searchForId(id) ;
+		
+		if (state == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		
+		manager.remove(state);
 	}
 }
