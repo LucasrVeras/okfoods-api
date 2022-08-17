@@ -1,17 +1,23 @@
 package br.com.okfoodsapi.api.controllers;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.Restaurant;
@@ -73,5 +79,45 @@ public class RestaurantController {
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
+	}
+	
+	@PatchMapping("/{restaurantId}")
+	public ResponseEntity<?> updateHalf(@PathVariable Long restaurantId,
+			@RequestBody Map<String , Object> fields){
+		
+		Restaurant restaurantCurrent = restaurantRepository.searchForId(restaurantId);
+		
+		if (restaurantCurrent == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		merge(fields, restaurantCurrent);
+		
+		return update(restaurantId, restaurantCurrent);
+	}
+
+	private void merge(Map<String, Object> fieldsOrigin, 
+			Restaurant restaurantGoal) {
+		
+		var objectMapper =  new ObjectMapper();
+		Restaurant restaurantOrigin = objectMapper
+				.convertValue(fieldsOrigin, Restaurant.class);
+		
+		System.out.println(restaurantOrigin);
+		
+		fieldsOrigin.forEach((nameProperties, valueProperties) -> {	
+			
+			Field field = ReflectionUtils
+					.findField(Restaurant.class, nameProperties);	
+			field.setAccessible(true);
+			
+			Object newValue = ReflectionUtils.getField(field, restaurantOrigin);
+			
+			System.out.println(nameProperties + " = " 
+					+ valueProperties + " = " 
+					+ newValue);
+			
+			ReflectionUtils.setField(field, restaurantGoal, newValue);
+		});
 	}
 }
