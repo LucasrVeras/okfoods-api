@@ -6,12 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 
-@Component
+@Repository
 public class RestaurantRepositoryImpl implements RestaurantRepository {
 
 	@PersistenceContext

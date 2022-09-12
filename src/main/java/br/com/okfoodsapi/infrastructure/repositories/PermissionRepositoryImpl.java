@@ -5,12 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.Permission;
 import br.com.okfoodsapi.domain.repositories.PermissionRepository;
 
-@Component
+@Repository
 public class PermissionRepositoryImpl implements PermissionRepository{
 	
 	@PersistenceContext

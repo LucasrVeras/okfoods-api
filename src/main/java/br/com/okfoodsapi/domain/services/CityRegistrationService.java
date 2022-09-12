@@ -36,6 +36,14 @@ public class CityRegistrationService {
 		
 	}
 	
+	public City addCidade(City city) {
+		
+		
+		return null;
+		
+		
+	}
+	
 	public void remove(Long cityId) {
 		try {
 			cityRepository.remove(cityId);

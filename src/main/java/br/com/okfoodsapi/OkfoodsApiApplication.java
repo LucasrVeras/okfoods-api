@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class OkfoodsApiApplication implements CommandLineRunner {
-
+		
 	public static void main(String[] args) {
 		SpringApplication.run(OkfoodsApiApplication.class, args);
 	}

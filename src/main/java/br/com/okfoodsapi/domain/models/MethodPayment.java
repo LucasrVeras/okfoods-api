@@ -19,8 +19,9 @@ public class MethodPayment {
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private Integer Long;
+	private Long id;
 	
 	@Column(name = "col_description")
 	private String description;
+	
 }
