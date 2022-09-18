@@ -7,6 +7,7 @@ import br.com.okfoodsapi.domain.models.Cuisine;
 public interface CuisineRepository {
 	
 	List<Cuisine> all();
+	List<Cuisine> consultForName(String name);
 	Cuisine searchForId(Long id);
 	Cuisine add(Cuisine cuisine);
 	void remove(Long id);

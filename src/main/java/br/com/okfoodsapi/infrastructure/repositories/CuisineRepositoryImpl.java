@@ -3,7 +3,6 @@ package br.com.okfoodsapi.infrastructure.repositories;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
@@ -15,8 +14,13 @@ import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 @Repository
 public class CuisineRepositoryImpl implements CuisineRepository {
 
-	@PersistenceContext
+	
 	private EntityManager manager;
+	
+	@Override
+	public Cuisine searchForId(Long cuisineId) {
+		return manager.find(Cuisine.class, cuisineId);
+	}
 	
 	@Override
 	public List<Cuisine> all(){
@@ -25,8 +29,10 @@ public class CuisineRepositoryImpl implements CuisineRepository {
 	}
 	
 	@Override
-	public Cuisine searchForId(Long id) {
-		return manager.find(Cuisine.class, id);
+	public List<Cuisine> consultForName(String name) {
+		return manager.createQuery("from Cuisine where name = :name", Cuisine.class)
+				.setParameter("name", name)
+				.getResultList();
 	}
 	
 	@Transactional
