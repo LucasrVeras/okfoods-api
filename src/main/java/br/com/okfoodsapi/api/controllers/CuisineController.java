@@ -1,6 +1,7 @@
 package br.com.okfoodsapi.api.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,16 @@ public class CuisineController {
 	
 	@GetMapping
 	public List<Cuisine> list(){
-		return cuisineRepository.all();
+		return cuisineRepository.findAll();
 	}
 	
 	@GetMapping("/{cuisinesId}")
 	public ResponseEntity<Cuisine> searchForId(@PathVariable Long cuisineId) {
 		
-		Cuisine cuisine = cuisineRepository.searchForId(cuisineId);
+		Optional<Cuisine> cuisine = cuisineRepository.findById(cuisineId);
 		
-		if (cuisine != null) {
-			return ResponseEntity.ok(cuisine);
+		if (cuisine.isPresent()) {
+			return ResponseEntity.ok(cuisine.get());
 		} else {
 			return ResponseEntity.notFound().build();
 		}	
@@ -59,12 +60,12 @@ public class CuisineController {
 	public ResponseEntity<Cuisine> update(@PathVariable Long cuisineId,
 			@RequestBody Cuisine cuisine) {
 		
-		Cuisine cuisineCurrent = cuisineRepository.searchForId(cuisineId);
+		Optional<Cuisine> cuisineCurrent = cuisineRepository.findById(cuisineId);
 		
-		if (cuisineCurrent != null) {
-			BeanUtils.copyProperties(cuisine, cuisineCurrent, "id");
-			cuisineService.add(cuisineCurrent);
-			return ResponseEntity.ok(cuisineCurrent);
+		if (cuisineCurrent.isPresent()) {
+			BeanUtils.copyProperties(cuisine, cuisineCurrent.get(), "id");
+			Cuisine cuisineSave = cuisineService.add(cuisineCurrent.get());
+			return ResponseEntity.ok(cuisineSave);
 		}
 			return ResponseEntity.notFound().build();
 	}

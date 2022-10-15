@@ -17,13 +17,13 @@ public class CuisineRegistrationService {
 	private CuisineRepository cuisineRepository;
 	
 	public Cuisine add(Cuisine cuisine) {
-		return cuisineRepository.add(cuisine);
+		return cuisineRepository.save(cuisine);
 	}
 	
 	public void remove(Long cuisineId) {
 		
 		try {
-			cuisineRepository.remove(cuisineId);
+			cuisineRepository.deleteById(cuisineId);
 		} catch(EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(String.format("There is no cuisine "
 								+ "registration with the code %d", cuisineId));

@@ -1,5 +1,7 @@
 package br.com.okfoodsapi.domain.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,14 +26,14 @@ public class RestaurantRegistrationService {
 	public Restaurant add(Restaurant restaurant) {
 		
 		Long cuisineId = restaurant.getCuisine().getId();
-		Cuisine cuisine = cuisineRepository.searchForId(cuisineId);
+		Optional<Cuisine> cuisine = cuisineRepository.findById(cuisineId);
 		
-		if (cuisine == null) {
+		if (cuisine.isEmpty()) {
 			throw new EntityNotFoundException(
 					String.format("There is no cuisine registration "
 							+ "with the code %d", cuisineId));
 		}else {
-			restaurant.setCuisine(cuisine);
+			restaurant.setCuisine(cuisine.get());
 			return restaurantRepository.add(restaurant);
 		}
 	}

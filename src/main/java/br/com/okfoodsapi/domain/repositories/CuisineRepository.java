@@ -1,14 +1,15 @@
 package br.com.okfoodsapi.domain.repositories;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.Cuisine;
 
-public interface CuisineRepository {
+@Repository
+public interface CuisineRepository extends JpaRepository<Cuisine, Long> {
 	
-	List<Cuisine> all();
-	List<Cuisine> consultForName(String name);
-	Cuisine searchForId(Long id);
-	Cuisine add(Cuisine cuisine);
-	void remove(Long id);
+//	List<Cuisine> consultForName(String name);
+	
+	
+	
 }
