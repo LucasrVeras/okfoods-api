@@ -9,7 +9,5 @@ import br.com.okfoodsapi.domain.models.Cuisine;
 public interface CuisineRepository extends JpaRepository<Cuisine, Long> {
 	
 //	List<Cuisine> consultForName(String name);
-	
-	
-	
+		
 }

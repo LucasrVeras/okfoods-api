@@ -1,6 +1,7 @@
 package br.com.okfoodsapi.api.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,16 +32,16 @@ public class CityController {
 	
 	@GetMapping
 	public List<City> list() {
-		return cityRepository.all();
+		return cityRepository.findAll();
 	}
 	
 	@GetMapping("/{cityId}")
 	public ResponseEntity<City> searchForId(@PathVariable Long cityId){
 		
-		City city = cityRepository.searchForId(cityId);
+		Optional <City> city = cityRepository.findById(cityId);
 		
 		if (city != null) {
-			return ResponseEntity.ok(city);
+			return ResponseEntity.ok(city.get());
 		}else {
 			return ResponseEntity.notFound().build();
 			

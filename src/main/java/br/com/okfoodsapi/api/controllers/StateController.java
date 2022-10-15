@@ -1,6 +1,7 @@
 package br.com.okfoodsapi.api.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,16 +32,16 @@ public class StateController {
 	
 	@GetMapping
 	public List<State> list(){
-		return stateRepository.all();
+		return stateRepository.findAll();
 	}
 	
 	@GetMapping("/{statesId}")
 	public ResponseEntity<State> searchForId(@PathVariable Long statesId){
 		
-		State state = stateRepository.searchForId(statesId);
+		Optional<State> state = stateRepository.findById(statesId);
 		
-		if (state != null) {
-			return ResponseEntity.ok(state);
+		if (state.isPresent()) {
+			return ResponseEntity.ok(state.get());
 		} else {
 			return ResponseEntity.notFound().build();
 		}

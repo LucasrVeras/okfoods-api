@@ -1,13 +1,11 @@
 package br.com.okfoodsapi.domain.repositories;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.Permission;
 
-public interface PermissionRepository {
+@Repository
+public interface PermissionRepository extends JpaRepository<Permission, Long> {
 	
-	List<Permission> all();
-	Permission searchForId(Long id);
-	Permission add(Permission permission);
-	void remove(Permission permission);
 }

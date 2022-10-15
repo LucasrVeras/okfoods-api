@@ -3,6 +3,7 @@ package br.com.okfoodsapi.api.controllers;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,16 +37,17 @@ public class RestaurantController {
 	
 	@GetMapping
 	public List<Restaurant> list(){
-		return restaurantRepository.all();
+		return restaurantRepository.findAll();
 	}
 	
 	@GetMapping("/{restaurantId}")
 	public ResponseEntity<Restaurant> searchForId(@PathVariable Long restaurantId){
 		
-		Restaurant restaurant = restaurantRepository.searchForId(restaurantId);
+		Optional<Restaurant> restaurant = restaurantRepository
+				.findById(restaurantId);
 		
 		if (restaurant != null) {
-			return ResponseEntity.ok(restaurant);
+			return ResponseEntity.ok(restaurant.get());
 		}else {
 			return ResponseEntity.notFound().build();
 		}
@@ -70,7 +72,7 @@ public class RestaurantController {
 			@RequestBody Restaurant restaurant){
 		
 		try {
-			if (restaurantRepository.searchForId(restaurantId) != null) {
+			if (restaurantRepository.findById(restaurantId) != null) {
 				restaurant.setId(restaurantId);
 				restaurantService.add(restaurant);
 				return ResponseEntity.ok(restaurant);
@@ -85,15 +87,16 @@ public class RestaurantController {
 	public ResponseEntity<?> updateHalf(@PathVariable Long restaurantId,
 			@RequestBody Map<String , Object> fields){
 		
-		Restaurant restaurantCurrent = restaurantRepository.searchForId(restaurantId);
+		Optional <Restaurant> restaurantCurrent = restaurantRepository
+				.findById(restaurantId);
 		
 		if (restaurantCurrent == null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		merge(fields, restaurantCurrent);
+		merge(fields, restaurantCurrent.get());
 		
-		return update(restaurantId, restaurantCurrent);
+		return update(restaurantId, restaurantCurrent.get());
 	}
 
 	private void merge(Map<String, Object> fieldsOrigin, 

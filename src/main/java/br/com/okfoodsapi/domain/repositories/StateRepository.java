@@ -1,13 +1,11 @@
 package br.com.okfoodsapi.domain.repositories;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.State;
 
-public interface StateRepository {
+@Repository
+public interface StateRepository extends JpaRepository<State, Long> {
 	
-	List<State> all();
-	State searchForId(Long id);
-	State add(State state);
-	void remove(Long id);
 }

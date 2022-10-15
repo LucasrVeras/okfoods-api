@@ -1,13 +1,11 @@
 package br.com.okfoodsapi.domain.repositories;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.City;
 
-public interface CityRepository {
+@Repository
+public interface CityRepository extends JpaRepository<City, Long>{
 	
-	List<City> all();
-	City searchForId(Long id);
-	City add(City city);
-	void remove(Long id);
 }

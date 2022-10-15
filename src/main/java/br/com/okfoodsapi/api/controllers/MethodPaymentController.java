@@ -19,6 +19,6 @@ public class MethodPaymentController {
 	
 	@GetMapping
 	public List<MethodPayment> list(){
-		return paymentRepository.all();
+		return paymentRepository.findAll();
 	}
 }

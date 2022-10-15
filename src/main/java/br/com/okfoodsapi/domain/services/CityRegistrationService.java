@@ -1,5 +1,7 @@
 package br.com.okfoodsapi.domain.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,30 +25,22 @@ public class CityRegistrationService {
 	public City add(City city) {
 		
 		Long cityId = city.getState().getId();
-		State state = stateRepository.searchForId(cityId);
+		Optional<State> state = stateRepository.findById(cityId);
 		
 		if (cityId == null) {
 			throw new EntityNotFoundException(
 					String.format("There is no cuisine registration "
 							+ "with the code %d", cityId));
 		} else {
-			city.setState(state);
-			return cityRepository.add(city);
+			city.setState(state.get());
+			return cityRepository.save(city);
 		}
-		
-	}
-	
-	public City addCidade(City city) {
-		
-		
-		return null;
-		
 		
 	}
 	
 	public void remove(Long cityId) {
 		try {
-			cityRepository.remove(cityId);
+			cityRepository.deleteById(cityId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new  EntityNotFoundException(String.format("There is no state "
 							+ "registration with the code %d", cityId));

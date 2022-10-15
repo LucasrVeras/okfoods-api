@@ -34,13 +34,13 @@ public class RestaurantRegistrationService {
 							+ "with the code %d", cuisineId));
 		}else {
 			restaurant.setCuisine(cuisine.get());
-			return restaurantRepository.add(restaurant);
+			return restaurantRepository.save(restaurant);
 		}
 	}
 	
 	public void remove(Long restaurantId) {
 		try {
-			restaurantRepository.remove(restaurantId);
+			restaurantRepository.deleteById(restaurantId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(String.format("There is no restauran"
 					+ " registration with the code %d", restaurantId));
