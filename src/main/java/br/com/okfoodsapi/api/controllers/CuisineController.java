@@ -38,7 +38,7 @@ public class CuisineController {
 		return cuisineRepository.findAll();
 	}
 	
-	@GetMapping("/{cuisinesId}")
+	@GetMapping("/{cuisineId}")
 	public ResponseEntity<Cuisine> searchForId(@PathVariable Long cuisineId) {
 		
 		Optional<Cuisine> cuisine = cuisineRepository.findById(cuisineId);
