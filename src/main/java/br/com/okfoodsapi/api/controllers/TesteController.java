@@ -35,15 +35,35 @@ public class TesteController {
 		return cuisineRepository.findSingleByName(name);
 	}
 	
+	@GetMapping("/cuisines/exists")
+	public boolean existsName(String name){
+		return cuisineRepository.existsByName(name);
+	}
+	
 	@GetMapping("/restaurants/find-tax-shipping-between")
 	public List<Restaurant> findByTaxShippingBetween(
 			BigDecimal taxInit, BigDecimal taxEnd){
 		
-		return restaurantRepository.findByTaxShippingBetween(taxInit, taxEnd);
+		return restaurantRepository.queryByTaxShippingBetween(taxInit, taxEnd);
 	}
 	
 	@GetMapping("/restaurants/for-name")
 	public List<Restaurant> restaurantsForName(String name, Long cuisineId){
-		return restaurantRepository.findByNameContainingAndCuisineId(name, cuisineId);
+		return restaurantRepository.consultByName(name, cuisineId);
+	}
+	
+	@GetMapping("/restaurants/frist")
+	public Optional<Restaurant> firstRestaurantsName(String name){
+		return restaurantRepository.findFirstRestaurantByNameContaining(name);
+	}
+	
+	@GetMapping("/restaurants/top")
+	public List<Restaurant> findTop (String name){
+		return restaurantRepository.findTop2ByNameContaining(name);
+	}
+	
+	@GetMapping("/restaurants/count")
+	public int countCuisine (Long cuisineId){
+		return restaurantRepository.countByCuisineId(cuisineId);
 	}
 }

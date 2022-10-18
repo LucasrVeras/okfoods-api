@@ -35,7 +35,6 @@ public class CityRegistrationService {
 			city.setState(state.get());
 			return cityRepository.save(city);
 		}
-		
 	}
 	
 	public void remove(Long cityId) {
