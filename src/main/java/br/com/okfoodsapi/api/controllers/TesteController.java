@@ -62,6 +62,14 @@ public class TesteController {
 		return restaurantRepository.findTop2ByNameContaining(name);
 	}
 	
+	@GetMapping("/restaurants/for-name-Shipping")
+	public List<Restaurant> restaurantsByShipping(String name,
+			BigDecimal taxShippingInit, BigDecimal taxShippingEnd){
+		
+		return restaurantRepository
+				.find(name, taxShippingInit, taxShippingEnd);
+	}
+	
 	@GetMapping("/restaurants/count")
 	public int countCuisine (Long cuisineId){
 		return restaurantRepository.countByCuisineId(cuisineId);
