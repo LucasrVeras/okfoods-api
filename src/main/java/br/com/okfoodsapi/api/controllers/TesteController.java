@@ -14,6 +14,8 @@ import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
+import br.com.okfoodsapi.infrastructure.repository.spec.RestaurantNameSimilarSpec;
+import br.com.okfoodsapi.infrastructure.repository.spec.RestaurantWithFreeShippingSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -62,7 +64,7 @@ public class TesteController {
 		return restaurantRepository.findTop2ByNameContaining(name);
 	}
 	
-	@GetMapping("/restaurants/for-name-Shipping")
+	@GetMapping("/restaurants/for-name-shipping")
 	public List<Restaurant> restaurantsByShipping(String name,
 			BigDecimal taxShippingInit, BigDecimal taxShippingEnd){
 		
@@ -73,5 +75,14 @@ public class TesteController {
 	@GetMapping("/restaurants/count")
 	public int countCuisine (Long cuisineId){
 		return restaurantRepository.countByCuisineId(cuisineId);
+	}
+	
+	@GetMapping("/restaurants/free-shipping")
+	public List<Restaurant> restaurantsWithFreeShipping(String name){
+		
+		var withFreeShipping = new RestaurantWithFreeShippingSpec();
+		var withNameSimilar =  new RestaurantNameSimilarSpec(name);
+
+		return restaurantRepository.findAll(withFreeShipping.and(withNameSimilar));
 	}
 }
