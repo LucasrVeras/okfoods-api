@@ -1,5 +1,8 @@
 package br.com.okfoodsapi.api.controllers;
 
+import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.NameSimilarSpec;
+import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.WithFreeShipping;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +17,6 @@ import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
-import br.com.okfoodsapi.infrastructure.repository.spec.RestaurantNameSimilarSpec;
-import br.com.okfoodsapi.infrastructure.repository.spec.RestaurantWithFreeShippingSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -79,10 +80,7 @@ public class TesteController {
 	
 	@GetMapping("/restaurants/free-shipping")
 	public List<Restaurant> restaurantsWithFreeShipping(String name){
-		
-		var withFreeShipping = new RestaurantWithFreeShippingSpec();
-		var withNameSimilar =  new RestaurantNameSimilarSpec(name);
-
-		return restaurantRepository.findAll(withFreeShipping.and(withNameSimilar));
+		return restaurantRepository.findAll(WithFreeShipping()
+				.and(NameSimilarSpec(name)));
 	}
 }

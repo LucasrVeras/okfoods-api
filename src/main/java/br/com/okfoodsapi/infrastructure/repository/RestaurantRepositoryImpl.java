@@ -16,9 +16,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import br.com.okfoodsapi.domain.models.Restaurant;
+import br.com.okfoodsapi.domain.repositories.RestaurantRepositoryQueries;
 
 @Repository
-public class RestaurantRepositoryImpl {
+public class RestaurantRepositoryImpl implements RestaurantRepositoryQueries {
 	
 	@PersistenceContext
 	private EntityManager manager;
