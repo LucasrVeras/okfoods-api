@@ -70,10 +70,10 @@ public class CuisineController {
 			return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/{CuiseneId}")
-	public ResponseEntity<Cuisine> remove(@PathVariable Long CuiseneId){		
+	@DeleteMapping("/{cuisineId}")
+	public ResponseEntity<Cuisine> remove(@PathVariable Long cuisineId){
 		try {
-			cuisineService.remove(CuiseneId);
+			cuisineService.remove(cuisineId);
 			return ResponseEntity.noContent().build();
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.notFound().build();

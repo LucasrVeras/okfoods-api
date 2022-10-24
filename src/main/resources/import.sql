@@ -1,6 +1,6 @@
 insert into tab_cuisine (col_name) values ('Thai');
 insert into tab_cuisine (col_name) values ('Indian');
-insert into tab_cuisine (col_name) values ('Brasilian');
+insert into tab_cuisine (col_name) values ('Brazilian');
 
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Thai Gourmet', 10, 1);
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Indi ganesha', 7.30, 2);

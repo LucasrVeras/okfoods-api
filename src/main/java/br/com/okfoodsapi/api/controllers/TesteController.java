@@ -19,7 +19,7 @@ import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 
 @RestController
-@RequestMapping("/teste")
+@RequestMapping("/test")
 public class TesteController {
 	
 	@Autowired
@@ -28,7 +28,7 @@ public class TesteController {
 	@Autowired
 	private RestaurantRepository restaurantRepository;
 	
-	@GetMapping("/cuisines/for-name")
+	@GetMapping("/cuisines/for-name-like")
 	public List<Cuisine> cuisineForName(@RequestParam("name") String name){
 		return cuisineRepository.findByNameContaining(name);
 	}
@@ -44,9 +44,7 @@ public class TesteController {
 	}
 	
 	@GetMapping("/restaurants/find-tax-shipping-between")
-	public List<Restaurant> findByTaxShippingBetween(
-			BigDecimal taxInit, BigDecimal taxEnd){
-		
+	public List<Restaurant> findByTaxShippingBetween(BigDecimal taxInit, BigDecimal taxEnd){
 		return restaurantRepository.queryByTaxShippingBetween(taxInit, taxEnd);
 	}
 	
@@ -77,7 +75,7 @@ public class TesteController {
 	public int countCuisine (Long cuisineId){
 		return restaurantRepository.countByCuisineId(cuisineId);
 	}
-	
+	//pão
 	@GetMapping("/restaurants/free-shipping")
 	public List<Restaurant> restaurantsWithFreeShipping(String name){
 		return restaurantRepository.findAll(WithFreeShipping()
