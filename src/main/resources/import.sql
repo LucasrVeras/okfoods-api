@@ -16,5 +16,7 @@ insert into tab_city (col_name, col_state_id) values ('Crateús', 1);
 insert into tab_method_payment (col_description) values ('Pix');
 insert into tab_method_payment (col_description) values ('Credit card');
 
+insert into tab_restaurant_methods_payment (col_restaurant_id,col_method_payment_id) values (1, 1), (1, 2),(2, 1),(2, 2),(3, 1);
+
 insert into tab_permission (col_description) values ('Adm');
 insert into tab_permission (col_description) values ('Client');
