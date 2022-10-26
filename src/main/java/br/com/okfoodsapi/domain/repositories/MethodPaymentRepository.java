@@ -7,4 +7,5 @@ import br.com.okfoodsapi.domain.models.MethodPayment;
 
 @Repository
 public interface MethodPaymentRepository extends JpaRepository<MethodPayment, Long> {
+    boolean existsByName(String name);
 }

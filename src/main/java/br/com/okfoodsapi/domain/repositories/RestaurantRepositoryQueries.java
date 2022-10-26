@@ -9,5 +9,7 @@ public interface RestaurantRepositoryQueries {
 	
 	List<Restaurant> find(String name, BigDecimal taxShippingInit,
 			BigDecimal taxShippingEnd);
+	
+	List<Restaurant> findAllShippingFree(String name);
 
 }

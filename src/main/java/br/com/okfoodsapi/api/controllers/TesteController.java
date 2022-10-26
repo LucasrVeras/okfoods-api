@@ -1,8 +1,5 @@
 package br.com.okfoodsapi.api.controllers;
 
-import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.NameSimilarSpec;
-import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.WithFreeShipping;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +40,11 @@ public class TesteController {
 		return cuisineRepository.existsByName(name);
 	}
 	
+	@GetMapping("/cuisines/")
+	public Optional<Cuisine> Cuisinefirst(){
+	    return cuisineRepository.findFirst();
+	}
+	
 	@GetMapping("/restaurants/find-tax-shipping-between")
 	public List<Restaurant> findByTaxShippingBetween(BigDecimal taxInit, BigDecimal taxEnd){
 		return restaurantRepository.queryByTaxShippingBetween(taxInit, taxEnd);
@@ -53,7 +55,7 @@ public class TesteController {
 		return restaurantRepository.consultByName(name, cuisineId);
 	}
 	
-	@GetMapping("/restaurants/frist")
+	@GetMapping("/restaurants/first")
 	public Optional<Restaurant> firstRestaurantsName(String name){
 		return restaurantRepository.findFirstRestaurantByNameContaining(name);
 	}
@@ -75,10 +77,14 @@ public class TesteController {
 	public int countCuisine (Long cuisineId){
 		return restaurantRepository.countByCuisineId(cuisineId);
 	}
-	//pão
+
 	@GetMapping("/restaurants/free-shipping")
 	public List<Restaurant> restaurantsWithFreeShipping(String name){
-		return restaurantRepository.findAll(WithFreeShipping()
-				.and(NameSimilarSpec(name)));
+		return restaurantRepository.findAllShippingFree(name);
+	}
+	
+	@GetMapping("/restaurants/restaurant-first")
+	public Optional<Restaurant> restaurantFirst(){
+	    return restaurantRepository.findFirst();
 	}
 }

@@ -31,4 +31,9 @@ public class MethodPaymentController {
 	public MethodPayment add(@RequestBody MethodPayment methodPayment) {
 		return paymentRepository.save(methodPayment);
 	}
+	
+	@GetMapping("/exists")
+	public boolean exists(String name){
+	    return paymentRepository.existsByName(name);
+	}
 }

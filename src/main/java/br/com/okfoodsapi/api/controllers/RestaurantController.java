@@ -99,7 +99,8 @@ public class RestaurantController {
 		return update(restaurantId, restaurantCurrent.get());
 	}
 
-	private void merge(Map<String, Object> fieldsOrigin, 
+	@SuppressWarnings("null")
+    private void merge(Map<String, Object> fieldsOrigin, 
 			Restaurant restaurantGoal) {
 		
 		var objectMapper =  new ObjectMapper();

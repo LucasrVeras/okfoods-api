@@ -24,7 +24,7 @@ public class RestaurantRegistrationService {
 	private CuisineRepository cuisineRepository;
 	
 	public Restaurant add(Restaurant restaurant) {
-		
+		 
 		Long cuisineId = restaurant.getCuisine().getId();
 		Optional<Cuisine> cuisine = cuisineRepository.findById(cuisineId);
 		

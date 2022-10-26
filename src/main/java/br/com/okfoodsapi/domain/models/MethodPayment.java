@@ -22,6 +22,6 @@ public class MethodPayment {
 	private Long id;
 	
 	@Column(name = "col_description")
-	private String description;
+	private String name;
 	
 }
