@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.infrastructure.repository;
+package br.com.okfoodsapi.infrastructure.repositories;
 
 import java.util.Optional;
 

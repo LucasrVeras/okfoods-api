@@ -4,7 +4,7 @@ insert into tab_cuisine (col_name) values ('Brazilian');
 
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Thai Gourmet', 10, 1);
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Indi ganesha', 7.30, 2);
-insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Nordeste', 0.0, 3);
+insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id) values ('Tradição Mineira', 0.0, 3);
 
 insert into tab_state (col_name) values ('Ceará');
 insert into tab_state (col_name) values ('Bahia');

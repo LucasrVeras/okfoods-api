@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.infrastructure.repository;
+package br.com.okfoodsapi.infrastructure.repositories;
 
 import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.NameSimilarSpec;
 import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.WithFreeShipping;

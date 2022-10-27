@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,22 +68,27 @@ public class RestaurantController {
 		}
 	}
 	
-	@PutMapping("/{restaurantId}")
+    @PutMapping("/{restaurantId}")
 	public ResponseEntity<?> update(@PathVariable Long restaurantId, 
 			@RequestBody Restaurant restaurant){
 		
 		try {
-			if (restaurantRepository.findById(restaurantId) != null) {
-				restaurant.setId(restaurantId);
-				restaurantService.add(restaurant);
-				return ResponseEntity.ok(restaurant);
-			}
-	        return ResponseEntity.notFound().build();
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			Restaurant currentRestaurant = restaurantRepository
+			        .findById(restaurantId).orElse(null);
+			if (currentRestaurant != null) {
+			    BeanUtils.copyProperties(restaurant, currentRestaurant, 
+			            "id", "methodsPayment");
+               
+                currentRestaurant = restaurantService.add(currentRestaurant);  
+                return ResponseEntity.ok(currentRestaurant);
+            }
+			 return ResponseEntity.notFound().build();
+		}   
+		catch( EntityNotFoundException e) {
+		    return ResponseEntity.badRequest().body(e.getMessage());
 		}
-	}
-	
+   }
+
 	@PatchMapping("/{restaurantId}")
 	public ResponseEntity<?> updateHalf(@PathVariable Long restaurantId,
 			@RequestBody Map<String , Object> fields){
