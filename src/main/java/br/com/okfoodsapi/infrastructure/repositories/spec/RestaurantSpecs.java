@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.infrastructure.repository.spec;
+package br.com.okfoodsapi.infrastructure.repositories.spec;
 
 import br.com.okfoodsapi.domain.models.Restaurant;
 

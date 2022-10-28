@@ -1,7 +1,7 @@
 package br.com.okfoodsapi.infrastructure.repositories;
 
-import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.NameSimilarSpec;
-import static br.com.okfoodsapi.infrastructure.repository.spec.RestaurantSpecs.WithFreeShipping;
+import static br.com.okfoodsapi.infrastructure.repositories.spec.RestaurantSpecs.NameSimilarSpec;
+import static br.com.okfoodsapi.infrastructure.repositories.spec.RestaurantSpecs.WithFreeShipping;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

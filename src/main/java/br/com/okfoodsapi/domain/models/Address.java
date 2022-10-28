@@ -25,8 +25,8 @@ public class Address {
     @Column(name = "col_address_complement")
     private String complement;
     
-    @Column(name = "col_address_neighborhood")
-    private String neighborhood; // Estado?
+    @Column(name = "col_address_district")
+    private String district; // Bairro?
     
     @ManyToOne
     @JoinColumn(name = "col_address_city_id")

@@ -77,7 +77,7 @@ public class RestaurantController {
 			        .findById(restaurantId).orElse(null);
 			if (currentRestaurant != null) {
 			    BeanUtils.copyProperties(restaurant, currentRestaurant, 
-			            "id", "methodsPayment");
+			            "id", "methodsPayment", "address", "dateRegister");
                
                 currentRestaurant = restaurantService.add(currentRestaurant);  
                 return ResponseEntity.ok(currentRestaurant);
