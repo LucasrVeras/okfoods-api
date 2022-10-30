@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -59,6 +60,10 @@ public class Restaurant {
 	@UpdateTimestamp
 	@Column(name = "col_date_Update", nullable = false)
 	private LocalDateTime dateUpdate;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "restaurant")
+	private List<Product> products = new ArrayList<>();
 	
 	@JsonIgnore
 	@ManyToMany

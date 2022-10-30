@@ -14,7 +14,7 @@ insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id, col_date
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id, col_date_register, col_date_Update) values ('Indi ganesha', 7.30, 2, current_timestamp, current_timestamp);
 insert into tab_restaurant (col_name, col_tax_shipping, col_cuisine_id, col_date_register, col_date_Update, col_address_cep, col_address_logradouro, col_address_number, col_address_complement, col_address_district, col_address_city_id) values ('Tradição Mineira', 0.0, 3, current_timestamp, current_timestamp, '99999999', 'Vasco da Gama', '4003', 'Loja 212', 'ADEOTA', 1);
 
-insert into tab_product (col_name, col_description, col_price, col_active, col_restaurant_id) values ('Pad Thai', 'Prato de macarrão de arroz frito', 55.00, true, 1);
+insert into tab_product (col_name, col_description, col_price, col_active, col_restaurant_id) values ('Pad Thai', 'Prato de macarrão com arroz frito', 55.00, true, 1);
 
 insert into tab_method_payment (col_description) values ('Pix');
 insert into tab_method_payment (col_description) values ('Credit card');
