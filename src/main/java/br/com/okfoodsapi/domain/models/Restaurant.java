@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,7 +45,9 @@ public class Restaurant {
 	@Column(name = "col_tax_shipping", nullable = false)
 	private BigDecimal taxShipping;
 	
-	@ManyToOne
+//	@JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer"})
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "col_cuisine_id", nullable = false)
 	private Cuisine cuisine;
 	
@@ -65,7 +69,6 @@ public class Restaurant {
 	@OneToMany(mappedBy = "restaurant")
 	private List<Product> products = new ArrayList<>();
 	
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "tab_restaurant_methods_payment",
 	    joinColumns = @JoinColumn(name = "col_restaurant_id"),

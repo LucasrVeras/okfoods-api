@@ -2,6 +2,7 @@ package br.com.okfoodsapi.domain.models;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -28,7 +29,7 @@ public class Address {
     @Column(name = "col_address_district")
     private String district; // Bairro?
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "col_address_city_id")
     private City city;
     

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,9 @@ public interface RestaurantRepository
 			JpaSpecificationExecutor<Restaurant>,
 			RestaurantRepositoryQueries{
 	
+    @Query("from Restaurant r join r.cuisine left join fetch r.methodsPayment")
+    List<Restaurant> findAll();
+    
 	List<Restaurant> queryByTaxShippingBetween(BigDecimal taxInit, BigDecimal taxEnd);
 	
 	List<Restaurant> consultByName(String name, @Param("id") long cuisineId);
