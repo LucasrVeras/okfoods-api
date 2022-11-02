@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import br.com.okfoodsapi.domain.models.Restaurant;
 
 @Repository
-public interface RestaurantRepository 
-		extends CustomJpaRepository<Restaurant, Long>, 
+public interface RestaurantRepository
+		extends CustomJpaRepository<Restaurant, Long>,
 			JpaSpecificationExecutor<Restaurant>,
 			RestaurantRepositoryQueries{
 	

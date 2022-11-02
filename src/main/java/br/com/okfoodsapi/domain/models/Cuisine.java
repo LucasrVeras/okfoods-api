@@ -31,7 +31,7 @@ public class Cuisine {
 	private Long id;
 	
 	@JsonProperty("title")
-	@Column(name = "col_name", nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 	
 	@JsonIgnore
