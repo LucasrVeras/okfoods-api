@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
-@Entity
+@Entity 
 @Table(name = "tab_restaurant")
 public class Restaurant {
 	
@@ -51,7 +51,6 @@ public class Restaurant {
 	@JoinColumn(name = "col_cuisine_id", nullable = false)
 	private Cuisine cuisine;
 	
-	@JsonIgnore
 	@Embedded
 	private Address address;
 	

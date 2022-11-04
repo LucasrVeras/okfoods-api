@@ -34,7 +34,7 @@ public class Cuisine {
 	@Column(name = "col_name", nullable = false)
 	private String name;
 	
-	@JsonProperty("desc")
+	@JsonIgnore
 	@Column(name = "col_desc")
 	private String desc;
 	

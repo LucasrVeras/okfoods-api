@@ -71,7 +71,6 @@ public class RestaurantController {
     @PutMapping("/{restaurantId}")
 	public ResponseEntity<?> update(@PathVariable Long restaurantId, 
 			@RequestBody Restaurant restaurant){
-		
 		try {
 			Restaurant currentRestaurant = restaurantRepository
 			        .findById(restaurantId).orElse(null);
@@ -79,13 +78,11 @@ public class RestaurantController {
 			    BeanUtils.copyProperties(restaurant, currentRestaurant, 
 			            "id", "methodsPayment", "address", 
 			            "dateRegister", "products");
-               
                 currentRestaurant = restaurantService.add(currentRestaurant);  
                 return ResponseEntity.ok(currentRestaurant);
             }
 			 return ResponseEntity.notFound().build();
-		}   
-		catch( EntityNotFoundException e) {
+		}catch( EntityNotFoundException e) {
 		    return ResponseEntity.badRequest().body(e.getMessage());
 		}
    }
