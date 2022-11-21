@@ -103,8 +103,8 @@ public class RestaurantController {
 		return update(restaurantId, restaurantCurrent.get());
 	}
 
-	@SuppressWarnings("null")
-    private void merge(Map<String, Object> fieldsOrigin, 
+    @SuppressWarnings("null")
+	private void merge(Map<String, Object> fieldsOrigin, 
 			Restaurant restaurantGoal) {
 		
 		var objectMapper =  new ObjectMapper();
@@ -114,6 +114,7 @@ public class RestaurantController {
 		System.out.println(restaurantOrigin);
 		
 		fieldsOrigin.forEach((nameProperties, valueProperties) -> {	
+			
 			
 			Field field = ReflectionUtils
 					.findField(Restaurant.class, nameProperties);	

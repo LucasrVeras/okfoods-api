@@ -45,12 +45,13 @@ public class Restaurant {
 	@Column(name = "col_tax_shipping", nullable = false)
 	private BigDecimal taxShipping;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "col_cuisine_id", nullable = false)
 	private Cuisine cuisine;
 	
+	@JsonIgnore
 	@Embedded
 	private Address address;
 	
