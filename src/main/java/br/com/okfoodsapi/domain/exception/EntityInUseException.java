@@ -1,19 +1,14 @@
 package br.com.okfoodsapi.domain.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-//@ResponseStatus(value = HttpStatus.CONFLICT)
-public class EntityInUseException extends ResponseStatusException {
+@ResponseStatus(value = HttpStatus.CONFLICT)
+public class EntityInUseException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	public EntityInUseException(HttpStatus status, @Nullable String reason) {
-		super(status, reason);
-	}
-
-	public EntityInUseException(String reason) {
-	     this(HttpStatus.CONFLICT, reason);
+	public EntityInUseException(String message) {
+	     super(message);
 	}
 }
