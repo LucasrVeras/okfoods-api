@@ -25,11 +25,11 @@ public class CuisineRegistrationService {
 		try {
 			cuisineRepository.deleteById(cuisineId);
 		} catch(EmptyResultDataAccessException e) {
-			throw new EntityNotFoundException(String.format("There is no cuisine "
-								+ "registration with the code %d", cuisineId));
+			throw new EntityNotFoundException(String.format("Não há registro de " 
+							+ "Cuisine com o id %d", cuisineId));
 		} catch (DataIntegrityViolationException e) {
-			throw new EntityInUseException(String.format("Cuisine cod %d cannot be "
-								+ "removed, because it is in use", cuisineId));
+			throw new EntityInUseException(String.format("Entidade de id %d esta"
+					+ " em uso e não pode ser removida", cuisineId));
 		}
 	}
 }
