@@ -1,11 +1,8 @@
 package br.com.okfoodsapi.api.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.City;
 import br.com.okfoodsapi.domain.repositories.CityRepository;
 import br.com.okfoodsapi.domain.services.CityRegistrationService;
@@ -36,40 +31,18 @@ public class CityController {
 	}
 	
 	@GetMapping("/{cityId}")
-	public ResponseEntity<City> searchForId(@PathVariable Long cityId){
-		
-		Optional <City> city = cityRepository.findById(cityId);
-		
-		if (city != null) {
-			return ResponseEntity.ok(city.get());
-		}else {
-			return ResponseEntity.notFound().build();
-			
-		}
+	public City searchForId(@PathVariable Long cityId){
+		return cityService.searchOrFail(cityId);
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> add(@RequestBody City city){
-		
-		try {
-			city = cityService.add(city);
-			return ResponseEntity.status(HttpStatus.CREATED)
-					.body(city);
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.badRequest()
-					.body(e.getMessage());
-		}
+	public City add(@RequestBody City cityId){
+		return cityService.add(cityId);
+	
 	}
 	
 	@DeleteMapping("/{cityId}")
-	public ResponseEntity<?> remove(@PathVariable Long cityId){
-		try {
-			cityService.remove(cityId);
-			return ResponseEntity.noContent().build();
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (EntityInUseException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
+	public void remove(@PathVariable Long cityId){
+		cityService.remove(cityId);
 	}
 }

@@ -3,12 +3,9 @@ package br.com.okfoodsapi.api.controllers;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 import br.com.okfoodsapi.domain.services.RestaurantRegistrationService;
@@ -42,65 +38,38 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/{restaurantId}")
-	public ResponseEntity<Restaurant> searchForId(@PathVariable Long restaurantId){
-		
-		Optional<Restaurant> restaurant = restaurantRepository
-				.findById(restaurantId);
-		
-		if (restaurant != null) {
-			return ResponseEntity.ok(restaurant.get());
-		}else {
-			return ResponseEntity.notFound().build();
-		}
+	public Restaurant searchForId(@PathVariable Long restaurantId){
+		return restaurantService.searchOrFail(restaurantId);
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> add(@RequestBody Restaurant restaurant){
-		
-		try {
-			restaurant = restaurantService.add(restaurant);
-			return ResponseEntity.status(HttpStatus.CREATED)
-					.body(restaurant);
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity
-					.badRequest()
-					.body(e.getMessage());
-		}
+	public Restaurant add(@RequestBody Restaurant restaurant){
+		return restaurantService.add(restaurant);
 	}
 	
-    @PutMapping("/{restaurantId}")
-	public ResponseEntity<?> update(@PathVariable Long restaurantId, 
+	@PutMapping("/{restaurantId}")
+	public Restaurant update(@PathVariable Long restaurantId, 
 			@RequestBody Restaurant restaurant){
-		try {
-			Restaurant currentRestaurant = restaurantRepository
-			        .findById(restaurantId).orElse(null);
-			if (currentRestaurant != null) {
-			    BeanUtils.copyProperties(restaurant, currentRestaurant, 
-			            "id", "methodsPayment", "address", 
-			            "dateRegister", "products");
-                currentRestaurant = restaurantService.add(currentRestaurant);  
-                return ResponseEntity.ok(currentRestaurant);
-            }
-			 return ResponseEntity.notFound().build();
-		}catch( EntityNotFoundException e) {
-		    return ResponseEntity.badRequest().body(e.getMessage());
-		}
+		
+		Restaurant currentRestaurant = restaurantService.searchOrFail(restaurantId);
+		
+		BeanUtils.copyProperties(restaurant, currentRestaurant, 
+				"id", "methodsPayment", "address", "dateRegister", "products");
+                
+		return restaurantService.add(currentRestaurant);
+                
    }
 
 	@PatchMapping("/{restaurantId}")
-	public ResponseEntity<?> updateHalf(@PathVariable Long restaurantId,
+	public Restaurant updateHalf(@PathVariable Long restaurantId,
 			@RequestBody Map<String , Object> fields){
 		
-		Optional <Restaurant> restaurantCurrent = restaurantRepository
-				.findById(restaurantId);
+		Restaurant restaurantCurrent = 
+				restaurantService.searchOrFail(restaurantId);
 		
-		if (restaurantCurrent == null) {
-			return ResponseEntity.notFound().build();
-		}
+		merge(fields, restaurantCurrent);
 		
-		merge(fields, restaurantCurrent.get());
-		
-		return update(restaurantId, restaurantCurrent.get());
+		return update(restaurantId, restaurantCurrent);
 	}
 
     @SuppressWarnings("null")

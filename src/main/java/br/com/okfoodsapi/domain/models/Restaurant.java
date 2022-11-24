@@ -45,7 +45,6 @@ public class Restaurant {
 	@Column(name = "col_tax_shipping", nullable = false)
 	private BigDecimal taxShipping;
 	
-	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "col_cuisine_id", nullable = false)
@@ -69,6 +68,7 @@ public class Restaurant {
 	@OneToMany(mappedBy = "restaurant")
 	private List<Product> products = new ArrayList<>();
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "tab_restaurant_methods_payment",
 	    joinColumns = @JoinColumn(name = "col_restaurant_id"),
