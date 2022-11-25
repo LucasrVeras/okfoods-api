@@ -25,7 +25,7 @@ insert into tab_cuisine (col_name) values ('Indian');
 insert into tab_cuisine (col_name) values ('Brazilian');
 insert into tab_cuisine (col_name) values ('Japan');
 insert into tab_state (col_name) values ('Ceará');
-insert into tab_state (col_name) values ('Bahia');
+insert into tab_state (col_name) values ('Bahia BA');
 insert into tab_city (col_name, col_state_id) values ('Fortaleza', 1);
 insert into tab_city (col_name, col_state_id) values ('Salvador', 2);
 insert into tab_city (col_name, col_state_id) values ('Crateús', 1);

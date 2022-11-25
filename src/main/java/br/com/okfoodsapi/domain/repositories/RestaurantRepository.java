@@ -17,7 +17,7 @@ public interface RestaurantRepository
 			JpaSpecificationExecutor<Restaurant>,
 			RestaurantRepositoryQueries{
 	
-    @Query("from Restaurant r join r.cuisine left join fetch r.methodsPayment")
+    @Query("from Restaurant r join r.cuisine")
     List<Restaurant> findAll();
     
 	List<Restaurant> queryByTaxShippingBetween(BigDecimal taxInit, BigDecimal taxEnd);

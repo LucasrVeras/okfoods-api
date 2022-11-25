@@ -80,21 +80,14 @@ public class RestaurantController {
 		Restaurant restaurantOrigin = objectMapper
 				.convertValue(fieldsOrigin, Restaurant.class);
 		
-		System.out.println(restaurantOrigin);
 		
 		fieldsOrigin.forEach((nameProperties, valueProperties) -> {	
-			
-			
 			Field field = ReflectionUtils
 					.findField(Restaurant.class, nameProperties);	
 			field.setAccessible(true);
 			
 			Object newValue = ReflectionUtils.getField(field, restaurantOrigin);
-			
-			System.out.println(nameProperties + " = " 
-					+ valueProperties + " = " 
-					+ newValue);
-			
+						
 			ReflectionUtils.setField(field, restaurantGoal, newValue);
 		});
 	}
