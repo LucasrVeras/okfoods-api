@@ -7,23 +7,33 @@ import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
 import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
+import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 
 @Service
 public class RestaurantRegistrationService {
 	
+  @Autowired
+	private RestaurantRepository restaurantRepository;
+
+  @Autowired
+  private CuisineRegistrationService cuisineService;
+
 	private static final String MSG_RESTAURANT_CONFLICT = 
 			"Restaurant %d não pode ser removido porque está em uso";
 
 	private static final String MSG_RESTAURANT_NOT_FOUND = 
 			"Não há Restaurant com o id %d";
 
-	@Autowired
-	private RestaurantRepository restaurantRepository;
-	
 	public Restaurant add(Restaurant restaurant) {
-		 return restaurantRepository.save(restaurant);
+
+    Long CuisineID = restaurant.getCuisine().getId();
+    Cuisine cuisine = cuisineService.searchOrFail(CuisineID);
+  
+    restaurant.setCuisine(cuisine);
+
+		return restaurantRepository.save(restaurant);
 	}
 	
 	public void remove(Long restaurantId) {

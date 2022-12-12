@@ -13,14 +13,14 @@ import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 @Service
 public class CuisineRegistrationService {
 	
-	private static final String MSG_CUISINE_CONFLICT = 
+	@Autowired
+	private CuisineRepository cuisineRepository;
+  
+  private static final String MSG_CUISINE_CONFLICT = 
 			"Entidade de id %d esta em uso e não pode ser removida";
 
 	private static final String MSG_CUISINE_NOT_FOUND = 
 			"Não há registro de Cuisine com o id %d";
-	
-	@Autowired
-	private CuisineRepository cuisineRepository;
 	
 	public Cuisine add(Cuisine cuisine) {
 		return cuisineRepository.save(cuisine);
