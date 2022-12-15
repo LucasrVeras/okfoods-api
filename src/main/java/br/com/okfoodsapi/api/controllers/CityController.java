@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.exception.RulesException;
+import br.com.okfoodsapi.domain.exception.StateNotFoundException;
 import br.com.okfoodsapi.domain.models.City;
 import br.com.okfoodsapi.domain.repositories.CityRepository;
 import br.com.okfoodsapi.domain.services.CityRegistrationService;
@@ -44,8 +45,11 @@ public class CityController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public City add(@RequestBody City cityId) {
-    return cityService.add(cityId);
-
+	try {
+		return cityService.add(cityId);
+	} catch (StateNotFoundException e) {
+		throw new RulesException(e.getMessage(), e);
+	}
   }
 
   @PutMapping("/{cityId}")

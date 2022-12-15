@@ -39,8 +39,8 @@ public class User {
     
     @ManyToMany
     @JoinTable(name = "tab_user_group",
-            joinColumns = @JoinColumn(name = "col_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "col_group_id"))
+      joinColumns = @JoinColumn(name = "col_user_id"),
+        inverseJoinColumns = @JoinColumn(name = "col_group_id"))
     private List<Group> groups = new ArrayList<>();
 
 }

@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.StateNotFoundException;
 import br.com.okfoodsapi.domain.models.State;
 import br.com.okfoodsapi.domain.repositories.StateRepository;
 
@@ -16,13 +16,8 @@ public class StateRegistrationService {
   @Autowired
   private StateRepository stateRepository;
   
-  private static final String MSG_STATE_NOT_FOUND = 
-		  "Não há State com o id %d";
-
   private static final String MSG_STATE_CONFLICT = 
-		  "State %d não pode ser removido porque está em uso";
-
-
+		  "State %d está em uso";
 
   public State add(State state) {
     return stateRepository.save(state);
@@ -41,7 +36,6 @@ public class StateRegistrationService {
 
   public State searchOrFail(Long stateId) {
     return stateRepository.findById(stateId).orElseThrow(() 
-    		-> new EntityNotFoundException(
-        String.format(MSG_STATE_NOT_FOUND, stateId)));
+    		-> new StateNotFoundException(stateId));
   }
 }
