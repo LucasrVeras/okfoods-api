@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.CityNotFoundException;
 import br.com.okfoodsapi.domain.models.City;
 import br.com.okfoodsapi.domain.models.State;
 import br.com.okfoodsapi.domain.repositories.CityRepository;
@@ -19,9 +19,6 @@ public class CityRegistrationService {
   
   @Autowired
   private CityRepository cityRepository;
-
-  private static final String MSG_CITY_NOT_FOUND = 
-		  "Não existe City id %d ";
 
   private static final String MSG_CITY_CONFLICT = 
 		  "City id %d não pode ser removido, porque está em uso";
@@ -48,7 +45,6 @@ public class CityRegistrationService {
 
   public City searchOrFail(Long cityId) {
     return cityRepository.findById(cityId).orElseThrow(() 
-    		-> new EntityNotFoundException(
-        String.format(MSG_CITY_NOT_FOUND, cityId)));
+    		-> new CityNotFoundException(cityId));
   }
 }

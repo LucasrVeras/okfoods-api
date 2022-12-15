@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.exception.RulesException;
-import br.com.okfoodsapi.domain.exception.StateNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.StateNotFoundException;
 import br.com.okfoodsapi.domain.models.City;
 import br.com.okfoodsapi.domain.repositories.CityRepository;
 import br.com.okfoodsapi.domain.services.CityRegistrationService;
@@ -62,7 +62,7 @@ public class CityController {
     try {
       return cityService.add(currentCity);
     } catch (EntityNotFoundException e) {
-      throw new RulesException(e.getMessage());
+      throw new RulesException(e.getMessage(), e);
     }
   }
 

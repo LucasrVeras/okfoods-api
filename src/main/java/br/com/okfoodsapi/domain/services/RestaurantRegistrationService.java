@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.RestaurantNotFoundException;
 import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
@@ -15,16 +15,13 @@ import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 public class RestaurantRegistrationService {
 	
   @Autowired
-	private RestaurantRepository restaurantRepository;
+  private RestaurantRepository restaurantRepository;
 
   @Autowired
   private CuisineRegistrationService cuisineService;
 
 	private static final String MSG_RESTAURANT_CONFLICT = 
 			"Restaurant %d não pode ser removido porque está em uso";
-
-	private static final String MSG_RESTAURANT_NOT_FOUND = 
-			"Não há Restaurant com o id %d";
 
 	public Restaurant add(Restaurant restaurant) {
 
@@ -49,7 +46,6 @@ public class RestaurantRegistrationService {
 	
 	public Restaurant searchOrFail(Long restaurantId) {
 		return restaurantRepository.findById(restaurantId).
-				orElseThrow(() -> new EntityNotFoundException
-						(String.format(MSG_RESTAURANT_NOT_FOUND, restaurantId)));
+				orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
 	}
 }

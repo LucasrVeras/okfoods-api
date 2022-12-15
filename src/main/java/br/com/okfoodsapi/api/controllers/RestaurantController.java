@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
 import br.com.okfoodsapi.domain.exception.RulesException;
+import br.com.okfoodsapi.domain.exception.notFound.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 import br.com.okfoodsapi.domain.services.RestaurantRegistrationService;
@@ -51,7 +51,7 @@ public class RestaurantController {
     try {
       return restaurantService.add(restaurant);
     } catch (EntityNotFoundException e) {
-      throw new RulesException(e.getMessage());
+      throw new RulesException(e.getMessage(), e);
     }
   }
 
@@ -69,7 +69,7 @@ public class RestaurantController {
     try {
       return restaurantService.add(currentRestaurant);
     } catch (EntityNotFoundException e) {
-      throw new RulesException(e.getMessage());
+      throw new RulesException(e.getMessage(), e);
     }
   }
 

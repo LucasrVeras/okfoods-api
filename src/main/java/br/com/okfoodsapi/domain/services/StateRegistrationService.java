@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.StateNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.StateNotFoundException;
 import br.com.okfoodsapi.domain.models.State;
 import br.com.okfoodsapi.domain.repositories.StateRepository;
 

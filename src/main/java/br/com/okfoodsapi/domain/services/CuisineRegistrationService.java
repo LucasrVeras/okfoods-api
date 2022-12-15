@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.notFound.CuisineNotFoundException;
 import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 
@@ -19,9 +19,6 @@ public class CuisineRegistrationService {
   private static final String MSG_CUISINE_CONFLICT = 
 			"Entidade de id %d esta em uso e não pode ser removida";
 
-	private static final String MSG_CUISINE_NOT_FOUND = 
-			"Não há registro de Cuisine com o id %d";
-	
 	public Cuisine add(Cuisine cuisine) {
 		return cuisineRepository.save(cuisine);
 	}
@@ -40,7 +37,6 @@ public class CuisineRegistrationService {
 	
 	public Cuisine searchOrFail(Long cuisineId) {
 		return cuisineRepository.findById(cuisineId)
-				.orElseThrow(() -> new EntityNotFoundException(String
-						.format(MSG_CUISINE_NOT_FOUND, cuisineId)));
+				.orElseThrow(() -> new CuisineNotFoundException(cuisineId));
 	}
 }

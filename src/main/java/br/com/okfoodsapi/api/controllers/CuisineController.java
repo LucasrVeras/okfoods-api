@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.okfoodsapi.domain.exception.RulesException;
+import br.com.okfoodsapi.domain.exception.notFound.CuisineNotFoundException;
 import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 import br.com.okfoodsapi.domain.services.CuisineRegistrationService;
@@ -42,17 +44,25 @@ public class CuisineController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cuisine add(@RequestBody Cuisine cuisine) {
-		return cuisineService.add(cuisine);
+		try {
+			return cuisineService.add(cuisine);
+		} catch (CuisineNotFoundException e) {
+			throw new RulesException(e.getMessage(), e);
+		}
 	}
 	
 	@PutMapping("/{cuisineId}")
 	public Cuisine update(@PathVariable Long cuisineId,
 			@RequestBody Cuisine cuisine) { 
 		
-		Cuisine currentCuisine = cuisineService.searchOrFail(cuisineId);
-		BeanUtils.copyProperties(cuisine, currentCuisine, "id");
-		
-		return cuisineService.add(currentCuisine);
+		try {
+			Cuisine currentCuisine = cuisineService.searchOrFail(cuisineId);
+			BeanUtils.copyProperties(cuisine, currentCuisine, "id");
+			
+			return cuisineService.add(currentCuisine);
+		} catch (CuisineNotFoundException e) {
+			throw new RulesException(e.getMessage(), e);
+		}
 	}
 
 	@DeleteMapping("/{cuisineId}")
