@@ -1,14 +1,11 @@
 package br.com.okfoodsapi.api.controllers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.okfoodsapi.api.controllers.exceptionhandler.Problem;
 import br.com.okfoodsapi.domain.exception.RulesException;
 import br.com.okfoodsapi.domain.exception.notfound.CityNotFoundException;
-import br.com.okfoodsapi.domain.exception.notfound.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.City;
 import br.com.okfoodsapi.domain.repositories.CityRepository;
 import br.com.okfoodsapi.domain.services.CityRegistrationService;
@@ -77,29 +72,5 @@ public class CityController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remove(@PathVariable Long cityId) {
 		cityService.remove(cityId);
-	}
-
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<?> handleEntityNotFoundException(
-			EntityNotFoundException e) {
-		
-		Problem problem = Problem.builder()
-				.dataTime(LocalDateTime.now())
-				.message(e.getMessage()).build();
-		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(problem);
-	}
-	
-	@ExceptionHandler(RulesException.class)
-	public ResponseEntity<?> handleRulesException(
-			RulesException e) {
-		
-		Problem problem = Problem.builder()
-				.dataTime(LocalDateTime.now())
-				.message(e.getMessage()).build();
-		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(problem);
-	}
+	}	
 }
