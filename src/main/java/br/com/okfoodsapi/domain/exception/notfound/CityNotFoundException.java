@@ -1,4 +1,4 @@
-package br.com.okfoodsapi.domain.exception.notFound;
+package br.com.okfoodsapi.domain.exception.notfound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

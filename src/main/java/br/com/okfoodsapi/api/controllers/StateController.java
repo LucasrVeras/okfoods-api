@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.okfoodsapi.domain.exception.RulesException;
-import br.com.okfoodsapi.domain.exception.notFound.StateNotFoundException;
+import br.com.okfoodsapi.domain.exception.notfound.StateNotFoundException;
 import br.com.okfoodsapi.domain.models.State;
 import br.com.okfoodsapi.domain.repositories.StateRepository;
 import br.com.okfoodsapi.domain.services.StateRegistrationService;

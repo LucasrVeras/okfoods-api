@@ -6,7 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.okfoodsapi.domain.exception.EntityInUseException;
-import br.com.okfoodsapi.domain.exception.notFound.CuisineNotFoundException;
+import br.com.okfoodsapi.domain.exception.notfound.CuisineNotFoundException;
 import br.com.okfoodsapi.domain.models.Cuisine;
 import br.com.okfoodsapi.domain.repositories.CuisineRepository;
 

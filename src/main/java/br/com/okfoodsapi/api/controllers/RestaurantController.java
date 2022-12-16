@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.okfoodsapi.domain.exception.RulesException;
-import br.com.okfoodsapi.domain.exception.notFound.EntityNotFoundException;
+import br.com.okfoodsapi.domain.exception.notfound.EntityNotFoundException;
 import br.com.okfoodsapi.domain.models.Restaurant;
 import br.com.okfoodsapi.domain.repositories.RestaurantRepository;
 import br.com.okfoodsapi.domain.services.RestaurantRegistrationService;
