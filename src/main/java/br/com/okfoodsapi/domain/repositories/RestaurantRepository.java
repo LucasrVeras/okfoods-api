@@ -7,11 +7,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import br.com.okfoodsapi.domain.models.Restaurant;
 
-@Repository
 public interface RestaurantRepository
 		extends CustomJpaRepository<Restaurant, Long>,
 			JpaSpecificationExecutor<Restaurant>,
